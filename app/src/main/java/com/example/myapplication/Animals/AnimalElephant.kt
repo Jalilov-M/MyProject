@@ -2,6 +2,7 @@ package com.example.myapplication.Animals
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +39,36 @@ import com.example.myapplication.R
 
 
 @Composable
- fun AnimalElephant(navController: NavController) {
+ fun AnimalElephant(navController: NavController ) {
+    var language by remember { mutableStateOf("en") }
+    val textMap = mapOf(
+        "en" to "Elephants are the biggest land animals on Earth! They live in Africa and Asia and love to be with their families.\n" +
+                "\n" +
+                "\uD83D\uDC3E Super Trunks: An elephant’s trunk is like a long nose and arm combined! They use it to drink water, pick up food, and even give hugs!\n" +
+                "\n" +
+                "\uD83D\uDC3E Big Ears: Their large ears help them stay cool in hot weather by flapping like fans.\n" +
+                "\n" +
+                "\uD83D\uDC3E Smart Giants: Elephants are very intelligent! They can remember places, recognize friends, and even feel emotions like happiness and sadness.\n" +
+                "\n" +
+                "\uD83D\uDC3E Heavyweights: Elephants can weigh as much as 10 cars and eat over 100 kg of food every day!\n" +
+                "\n" +
+                "\uD83D\uDC3E Loving Families: Elephants live in big families called herds and take care of each other, just like humans do!\n" +
+                "\n" +
+                "Elephants are gentle giants who love water, playing in mud, and spending time with their friends! \uD83D\uDC18\uD83D\uDC99",
+        "ru" to "Слоны — самые большие наземные животные на Земле! Они живут в Африке и Азии и любят быть рядом с семьёй.\n" +
+                "\n" +
+                "\uD83D\uDC3E Суперхобот: Хобот слона — это и нос, и рука! С его помощью слон пьёт воду, поднимает еду и даже обнимается!\n" +
+                "\n" +
+                "\uD83D\uDC3E Огромные уши: Большие уши помогают слону охлаждаться в жару — он машет ими, как веером.\n" +
+                "\n" +
+                "\uD83D\uDC3E Умные великаны: Слоны очень умные! Они запоминают места, узнают друзей и даже чувствуют радость и грусть.\n" +
+                "\n" +
+                "\uD83D\uDC3E Тяжеловесы: Слоны весят как 10 машин и съедают более 100 кг еды в день!\n" +
+                "\n" +
+                "\uD83D\uDC3E Дружные семьи: Слоны живут в больших семьях — стадах — и заботятся друг о друге, как люди.\n" +
+                "\n" +
+                "Слоны — добрые великаны, которые любят воду, грязевые ванны и игры с друзьями! \uD83D\uDC18\uD83D\uDC99\n"
+    )
     Column {
         Column(
             modifier = Modifier
@@ -63,19 +97,33 @@ import com.example.myapplication.R
 
                     Text(
                         "Elephant",
-                        Modifier.padding(start = 20.dp),
+                        Modifier.padding(start = 10.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
                         color = Color.White
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.ico),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
+                        painter = painterResource(id = R.drawable.ru),
+                        contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 150.dp)
-                            .size(35.dp)
+                            .padding(start = 80.dp)
                             .clip(RoundedCornerShape(20.dp))
+
+                            .size(35.dp)
+                            .clickable { language ="ru" }
+
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.en),
+                        contentDescription = "English", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .padding(start = 1.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .size(35.dp)
+                            .clickable { language="en" }
+
                     )
                 }
             }
@@ -91,15 +139,8 @@ import com.example.myapplication.R
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(
-                        text = "The elephant (Elephantidae) is the largest land animal on Earth, known for its immense size, intelligence, and distinctive features such as its trunk, large ears, and tusks. There are three species of elephants: the **African bush elephant** (*Loxodonta africana*), the **African forest elephant** (*Loxodonta cyclotis*), and the **Asian elephant** (*Elephas maximus*). African elephants are the largest, with males sometimes weighing over **6,000 kg (13,200 lbs)**, while Asian elephants are slightly smaller in comparison.\n" +
-                                "\n" +
-                                "Elephants are herbivores, with a diet consisting of grasses, fruits, bark, leaves, and shrubs. Their trunks, which are long, muscular extensions of their upper lip and nose, are incredibly versatile, allowing them to pick up food, drink water, communicate, and even help in social interactions. The trunks also help elephants reach high branches and dig for water.\n" +
-                                "\n" +
-                                "Elephants are known for their complex social structure. They live in herds led by a matriarch, typically the oldest female, who makes decisions for the group. Herds are usually composed of female elephants and their young, while males tend to leave the herd as they mature. These animals are highly **social and emotional**, often displaying behaviors like grief, joy, and empathy. For example, elephants are known to mourn their dead, sometimes even returning to the remains of deceased herd members.\n" +
-                                "\n" +
-                                "Elephants have large ears that help regulate their body temperature, as they have a large amount of blood vessels in them. Their tusks, which are elongated incisor teeth, are used for digging, stripping bark from trees, and defending themselves. Unfortunately, these tusks make elephants targets for poaching, as they are highly valued for their ivory. Both African and Asian elephants face serious threats from habitat destruction, human-wildlife conflict, and illegal poaching, leading to a decline in populations, particularly in Asia.\n" +
-                                "\n" +
-                                "Conservation efforts, including protected areas, anti-poaching laws, and wildlife corridors, are crucial to preserving these magnificent creatures. Elephants play an important ecological role by maintaining the health of their environments, such as spreading seeds and creating waterholes that other animals depend on. They are also revered in many cultures, symbolizing wisdom, strength, and longevity.", Modifier.padding(5.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
+                        text = textMap[language] ?: ""
+                        , Modifier.padding(10.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
                     )
                 }
             }

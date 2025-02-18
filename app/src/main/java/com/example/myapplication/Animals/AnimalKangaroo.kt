@@ -39,43 +39,43 @@ import com.example.myapplication.R
 
 
 @Composable
- fun AnimalGriraffe  (navController: NavController) {
+ fun AnimalKangaroo(navController: NavController) {
     var language by remember { mutableStateOf("en") }
     val textMap = mapOf(
-        "en" to "Giraffes are the tallest animals in the world! They live in Africa and love eating leaves from tall trees.\n" +
+        "en" to "Kangaroos are bouncy, strong, and unique animals that live in Australia. They are famous for their big feet and strong tails!\n" +
                 "\n" +
-                "\uD83D\uDC3E Super Tall: Giraffes can grow up to 6 meters (20 feet) tall—that’s as high as a two-story house!\n" +
+                "\uD83D\uDC3E Super Jumpers: Kangaroos are amazing jumpers! They can jump over 3 meters (10 feet) in a single leap—that’s as tall as a basketball hoop!\n" +
                 "\n" +
-                "\uD83D\uDC3E Long Neck: A giraffe’s neck is as long as an adult human—about 2 meters (6 feet)! But guess what? They have the same number of neck bones as humans—just much bigger!\n" +
+                "\uD83D\uDC3E Powerful Legs: A kangaroo’s hind legs are super strong, and they can use them to kick really hard if they feel threatened.\n" +
                 "\n" +
-                "\uD83D\uDC3E Blue Tongue: Their tongues are dark blue or purple and can be 50 cm (20 inches) long! This helps protect them from the hot sun while they eat.\n" +
+                "\uD83D\uDC3E Long Tails: A kangaroo’s tail is as long as its body, and it helps them balance when jumping and moving quickly.\n" +
                 "\n" +
-                "\uD83D\uDC3E Fast Runners: Even though giraffes look slow, they can run up to 60 km/h (37 mph) for short distances!\n" +
+                "\uD83D\uDC3E Pouch for Babies: Female kangaroos have a special pouch where they carry their babies, called joeys. The joey stays in the pouch for several months until it’s big enough to hop around!\n" +
                 "\n" +
-                "\uD83D\uDC3E Sleepy Giants: Giraffes sleep only 30 minutes to 2 hours a day—one of the shortest sleep times of any animal!\n" +
+                "\uD83D\uDC3E Bouncing Everywhere: Kangaroos don’t walk like other animals. They hop on their strong hind legs to travel long distances without getting tired.\n" +
                 "\n" +
-                "\uD83D\uDC3E Powerful Kick: A giraffe’s kick is so strong it can knock down a lion!\n" +
+                "\uD83D\uDC3E Herbivores: Kangaroos are plant-eaters and love munching on grasses and leaves.\n" +
                 "\n" +
-                "\uD83D\uDC3E No Voice?: Giraffes are very quiet, but they can make humming, grunting, and even mooing sounds!\n" +
+                "\uD83D\uDC3E Sleepy Animals: Kangaroos like to rest during the hottest part of the day, staying cool in the shade and bouncing around in the cooler evenings.\n" +
                 "\n" +
-                "Giraffes are gentle giants that love roaming the African savanna! \uD83E\uDD92\uD83C\uDF3F",
-        "ru" to "Жирафы — самые высокие животные в мире! Они живут в Африке и любят лакомиться листьями с высоких деревьев.\n" +
+                "Kangaroos are fun, strong, and love to bounce around Australia! \uD83E\uDD98\uD83C\uDF3F",
+        "ru" to "Кенгуру — прыгающие, сильные и уникальные животные, которые живут в Австралии. Они известны своими большими лапами и сильными хвостами!\n" +
                 "\n" +
-                "\uD83D\uDC3E Очень высокие: Жирафы могут вырастать до 6 метров—это как двухэтажный дом!\n" +
+                "\uD83D\uDC3E Отличные прыгуны: Кенгуру — потрясающие прыгуны! Они могут прыгать на 3 метра за один раз — это как высота баскетбольного кольца!\n" +
                 "\n" +
-                "\uD83D\uDC3E Длинная шея: Шея жирафа длиной почти 2 метра—примерно как рост взрослого человека! Но знаете что? У них столько же шейных позвонков, сколько у людей—просто они намного больше!\n" +
+                "\uD83D\uDC3E Мощные задние лапы: Задние лапы кенгуру очень сильные, и они могут использовать их, чтобы сильно пнуть в случае угрозы.\n" +
                 "\n" +
-                "\uD83D\uDC3E Синий язык: Язык жирафа тёмно-синий или фиолетовый и может быть длиной до 50 см! Это помогает ему не обжигаться на солнце, пока он ест.\n" +
+                "\uD83D\uDC3E Длинный хвост: Хвост кенгуру такой же длины, как его тело и помогает им поддерживать равновесие при прыжках и быстром движении.\n" +
                 "\n" +
-                "\uD83D\uDC3E Быстрые бегуны: Несмотря на длинные ноги, жирафы могут разгоняться до 60 км/ч!\n" +
+                "\uD83D\uDC3E Кармашек для детёнышей: У самок кенгуру есть особый кармашек, где они носят своих детёнышей, называемых джойи. Джойи остаются в кармашке несколько месяцев, пока не станут достаточно большими, чтобы прыгать!\n" +
                 "\n" +
-                "\uD83D\uDC3E Мало спят: Жирафы спят всего от 30 минут до 2 часов в сутки—это один из самых коротких снов среди животных!\n" +
+                "\uD83D\uDC3E Прыгают всюду: Кенгуру не ходят, как другие животные. Они прыгают на сильных задних лапах, что позволяет им преодолевать большие расстояния без усталости.\n" +
                 "\n" +
-                "\uD83D\uDC3E Сильный удар: Удар жирафа такой мощный, что он может свалить даже льва!\n" +
+                "\uD83D\uDC3E Травоядные: Кенгуру — травоядные и любят поедать траву и листья.\n" +
                 "\n" +
-                "\uD83D\uDC3E Почти не издают звуков: Жирафы очень тихие, но они умеют гудеть, фыркать и даже \"мычать\"!\n" +
+                "\uD83D\uDC3E Сонные животные: Кенгуру любят отдыхать в самый жаркий период дня, оставаясь в тени, и активны, когда становится прохладнее.\n" +
                 "\n" +
-                "Жирафы — это добрые великаны, которые живут в африканской саванне! \uD83E\uDD92\uD83C\uDF3F"
+                "Кенгуру — весёлые, сильные и любящие прыгать животные, которые обитают в Австралии! \uD83E\uDD98\uD83C\uDF3F"
     )
     Column {
         Column(
@@ -104,7 +104,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Giraffe",
+                        "Kangaroo",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -115,7 +115,7 @@ import com.example.myapplication.R
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 110.dp)
+                            .padding(start = 65.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)
@@ -138,12 +138,12 @@ import com.example.myapplication.R
             Box() {
                 Column(Modifier.verticalScroll(rememberScrollState())) {
                     Image(
-                        painter = painterResource(id = R.drawable.a88),
+                        painter = painterResource(id = R.drawable.ka1),
                         contentDescription = "ImG", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(5.dp)
-                            .size(width = 0.dp, height = 190.dp)
+                            .size(width = 150.dp, height = 190.dp)
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(

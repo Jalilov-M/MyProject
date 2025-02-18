@@ -2,6 +2,7 @@ package com.example.myapplication.Animals
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +40,47 @@ import com.example.myapplication.R
 
 @Composable
  fun AnimalTiger(navController: NavController) {
+    var language by remember { mutableStateOf("en") }
+    val textMap = mapOf(
+        "en" to "Tigers are the biggest cats in the world! They are strong, fast, and love to swim. These beautiful animals live in forests and grasslands of Asia.\n" +
+                "\n" +
+                "\uD83D\uDC3E Biggest Cat: Tigers are the largest wild cats—they can grow up to 3 meters (10 feet) long and weigh more than 300 kg (660 lbs)!\n" +
+                "\n" +
+                "\uD83D\uDC3E Unique Stripes: No two tigers have the same stripes! Their patterns are like human fingerprints—each one is different.\n" +
+                "\n" +
+                "\uD83D\uDC3E Powerful Roar: A tiger’s roar is so loud it can be heard 3 km (2 miles) away!\n" +
+                "\n" +
+                "\uD83D\uDC3E Loves Water: Unlike most cats, tigers love to swim! They can swim for long distances and often cool off in rivers and lakes.\n" +
+                "\n" +
+                "\uD83D\uDC3E Great Jumpers: Tigers can jump up to 5 meters (16 feet) in the air—higher than a basketball hoop!\n" +
+                "\n" +
+                "\uD83D\uDC3E Silent Hunters: Tigers have soft pads on their feet, which help them walk quietly when hunting.\n" +
+                "\n" +
+                "\uD83D\uDC3E Sharp Teeth & Claws: A tiger’s teeth can grow up to 7.5 cm (3 inches) long! Their claws are super sharp and help them catch prey.\n" +
+                "\n" +
+                "\uD83D\uDC3E Solo Life: Unlike lions, tigers live alone and only meet others during mating season or when raising cubs.\n" +
+                "\n" +
+                "Tigers are strong, fast, and amazing hunters! \uD83D\uDC2F\uD83C\uDF3F",
+        "ru" to "Тигры — самые большие дикие кошки в мире! Они сильные, быстрые и любят воду. Эти красивые животные живут в лесах и степях Азии.\n" +
+                "\n" +
+                "\uD83D\uDC3E Самая большая кошка: Тигры — крупнейшие дикие кошки! Они могут вырастать до 3 метров в длину и весить более 300 кг!\n" +
+                "\n" +
+                "\uD83D\uDC3E Уникальные полоски: У каждого тигра свой уникальный узор полос—как отпечатки пальцев у людей, они никогда не повторяются!\n" +
+                "\n" +
+                "\uD83D\uDC3E Мощный рёв: Рёв тигра очень громкий—его слышно на расстоянии 3 км!\n" +
+                "\n" +
+                "\uD83D\uDC3E Любит воду: В отличие от других кошек, тигры обожают плавать! Они могут проплывать большие расстояния и часто отдыхают в воде.\n" +
+                "\n" +
+                "\uD83D\uDC3E Отличные прыгуны: Тигры могут прыгать на 5 метров в высоту—выше баскетбольного кольца!\n" +
+                "\n" +
+                "\uD83D\uDC3E Тихие охотники: Подушечки на лапах помогают тиграм двигаться бесшумно, чтобы подкрадываться к добыче.\n" +
+                "\n" +
+                "\uD83D\uDC3E Острые зубы и когти: Клыки тигра могут достигать 7,5 см в длину! А их когти очень острые и помогают ловить добычу.\n" +
+                "\n" +
+                "\uD83D\uDC3E Одиночки: В отличие от львов, тигры живут в одиночку и встречаются с другими тиграми только во время брачного сезона или когда растят детёнышей.\n" +
+                "\n" +
+                "Тигры — мощные, ловкие и красивые хищники! \uD83D\uDC2F\uD83C\uDF3F"
+    )
     Column {
         Column(
             modifier = Modifier
@@ -68,13 +114,27 @@ import com.example.myapplication.R
                         color = Color.White
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.ico),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
+                        painter = painterResource(id = R.drawable.ru),
+                        contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 175.dp)
-                            .size(60.dp)
+                            .padding(start = 130.dp)
                             .clip(RoundedCornerShape(20.dp))
+
+                            .size(35.dp)
+                            .clickable { language ="ru" }
+
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.en),
+                        contentDescription = "English", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .padding(start = 1.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .size(35.dp)
+                            .clickable { language="en" }
+
                     )
                 }
             }
@@ -90,14 +150,8 @@ import com.example.myapplication.R
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(
-                        text = "The tiger (Panthera tigris) is the largest wild cat species and a powerful predator known for its striking orange coat with black stripes. It has a muscular body, sharp claws, and strong jaws, making it an apex predator in its ecosystem. Tigers are primarily found in forests, grasslands, and mangroves across Asia, from India and Russia to Southeast Asia and Indonesia.\n" +
-                                "\n" +
-                                "Tigers are solitary hunters, relying on stealth and strength to ambush prey such as deer, wild boar, and buffalo. Unlike most cats, they are excellent swimmers and often cool off or hunt in the water. Each tiger has a unique stripe pattern, much like a human fingerprint, which helps with camouflage in dense vegetation.\n" +
-                                "\n" +
-                                "There are several subspecies of tigers, including the Bengal tiger, Siberian tiger, Indochinese tiger, Malayan tiger, South China tiger, and Sumatran tiger. The Siberian tiger is the largest, while the Sumatran tiger is the smallest and most endangered. Sadly, habitat destruction and poaching have led to a dramatic decline in tiger populations, with fewer than 4,000 remaining in the wild. Conservation efforts focus on protecting their natural habitats, enforcing anti-poaching laws, and increasing awareness to prevent their extinction.\n" +
-                                "\n" +
-                                "Tigers can roar so loudly that their call can be heard up to three kilometers away. They are symbols of strength, courage, and power in many cultures, appearing in folklore, mythology, and national emblems. Despite their fearsome reputation, they play a crucial role in maintaining ecological balance, making their conservation essential for the health of their ecosystems.\n" +
-                                "\n", Modifier.padding(5.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
+                        text = textMap[language] ?: ""
+                        , Modifier.padding(10.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
                     )
                 }
             }

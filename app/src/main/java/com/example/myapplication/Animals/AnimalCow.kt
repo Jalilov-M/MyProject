@@ -39,34 +39,45 @@ import com.example.myapplication.R
 
 
 @Composable
-fun AnimalBear(navController: NavController) {
+fun AnimalCow(navController: NavController) {
     var language by remember { mutableStateOf("en") }
 
     val textMap = mapOf(
-        "en" to "Bears are big, strong, and fluffy animals that live in forests, mountains, and even icy places! There are different kinds of bears, like brown bears, black bears, and polar bears. Some, like pandas, love to eat bamboo, while others enjoy honey, berries, fish, and even insects!\n" +
+        "en" to "Cows are gentle, social, and important animals on farms all over the world. They provide us with milk, meat, and are loved for their calm nature.\n" +
                 "\n" +
-                "\uD83D\uDC3E Hibernation: Some bears sleep all winter in their dens. This is called hibernation, and it helps them save energy when it's cold and there’s little food.\n" +
+                "\uD83D\uDC3E Milk Makers: Cows are known for producing milk, which we drink, and it’s also used to make cheese, butter, and yogurt! A cow can drink up to 100 liters (26 gallons) of water a day to stay healthy.\n" +
                 "\n" +
-                "\uD83D\uDC3E Super Sniffers: Bears have an amazing sense of smell—even better than dogs! They can smell food from far, far away.\n" +
+                "\uD83D\uDC3E Big Ears and Eyes: Cows have big eyes and sensitive ears that can move in different directions to listen for sounds all around them.\n" +
                 "\n" +
-                "\uD83D\uDC3E Bear Cubs: Baby bears are called cubs. They are born tiny and stay close to their mother, learning how to find food and stay safe.\n" +
+                "\uD83D\uDC3E Social Animals: Cows are very social and like to stay in groups. They have close friendships with other cows and can even recognize their friends after being apart for a long time.\n" +
                 "\n" +
-                "\uD83D\uDC3E Fast & Strong: Even though bears look slow, they can run really fast—some as fast as a horse! They are also great at climbing trees and swimming.\n" +
+                "\uD83D\uDC3E Good Memory: Cows have a good memory and can remember things for a long time, like the places where they’ve been or the faces of other cows.\n" +
                 "\n" +
-                "But remember, bears are wild animals and should be respected. They are best watched from a safe distance or in nature videos! \uD83C\uDF3F\uD83D\uDC3B\n" +
+                "\uD83D\uDC3E Mooing Sounds: Cows make a sound called mooing to communicate with each other. Each cow has a unique moo, like a voiceprint!\n" +
                 "\n" +
+                "\uD83D\uDC3E Eating Machines: Cows eat a lot! They spend 6–8 hours a day eating and can chew their food over 40,000 times a day!\n" +
+                "\n" +
+                "\uD83D\uDC3E Large Bodies: Cows can weigh between 500 to 900 kg (1100 to 2000 lbs), and they have four stomachs to help them digest their food.\n" +
+                "\n" +
+                "Cows are gentle, social, and hardworking animals that help us in many ways! \uD83D\uDC04\uD83C\uDF3E\n" +
                 "\n",
-        "ru" to "Медведи — это большие, сильные и пушистые животные, которые живут в лесах, горах и даже в снегах! Бывают бурые, чёрные и белые медведи. Некоторые, как панды, любят кушать бамбук, а другие — мёд, ягоды, рыбу и даже насекомых!\n" +
+        "ru" to "Коровы — дружелюбные, социальные и важные животные на фермах по всему миру. Они дают нам молоко, мясо и любимы за их спокойный характер.\n" +
                 "\n" +
-                "\uD83D\uDC3E Спячка: Некоторые медведи спят всю зиму в своих берлогах. Это называется спячка, и она помогает им сохранять силы, когда холодно и мало еды.\n" +
+                "\uD83D\uDC3E Производители молока: Коровы известны тем, что дают молоко, которое мы пьем, и из которого делают сыр, масло и йогурт! Коровы могут пить до 100 литров воды в день, чтобы оставаться здоровыми.\n" +
                 "\n" +
-                "\uD83D\uDC3E Супер-нюх: У медведей потрясающий нюх — лучше, чем у собак! Они могут учуять еду издалека.\n" +
+                "\uD83D\uDC3E Большие глаза и уши: У коров большие глаза и чувствительные уши, которые могут двигаться в разные стороны, чтобы услышать звуки вокруг.\n" +
                 "\n" +
-                "\uD83D\uDC3E Медвежата: Маленькие медведи называются медвежатами. Они рождаются крошечными и сначала живут с мамой, которая учит их находить еду и защищаться.\n" +
+                "\uD83D\uDC3E Социальные животные: Коровы очень социальные и любят оставаться в группах. У них есть близкие дружбы с другими коровами, и они могут узнавать своих друзей, даже если долго не виделись.\n" +
                 "\n" +
-                "\uD83D\uDC3E Быстрые и сильные: Хотя медведи кажутся медлительными, они могут бегать так же быстро, как лошади! А ещё они отлично лазают по деревьям и плавают.\n" +
+                "\uD83D\uDC3E Хорошая память: Коровы обладают хорошей памятью и могут запомнить вещи надолго, например, места, где они были, или лица других коров.\n" +
                 "\n" +
-                "Но помните, что медведи — дикие животные, и их лучше наблюдать издалека или в интересных видео про природу! \uD83C\uDF3F\uD83D\uDC3B"
+                "\uD83D\uDC3E Мычание: Коровы издают звук, который называется мычание, чтобы общаться между собой. У каждой коровы есть уникальное мычание, как отпечаток голоса!\n" +
+                "\n" +
+                "\uD83D\uDC3E Много едят: Коровы много едят! Они тратят 6–8 часов в день на поедание пищи и могут жевать более 40 000 раз за день!\n" +
+                "\n" +
+                "\uD83D\uDC3E Большие тела: Коровы могут весить от 500 до 900 кг и имеют четыре желудка для переваривания пищи.\n" +
+                "\n" +
+                "Коровы — дружелюбные, социальные и трудолюбивые животные, которые помогают нам во многих вещах! \uD83D\uDC04\uD83C\uDF3E"
     )
     Column {
         Column(
@@ -97,7 +108,7 @@ fun AnimalBear(navController: NavController) {
 
 
                     Text(
-                        "Bear",
+                        "Cow",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -131,7 +142,7 @@ fun AnimalBear(navController: NavController) {
             Box() {
                 Column(Modifier.verticalScroll(rememberScrollState())) {
                     Image(
-                        painter = painterResource(id = R.drawable.a5),
+                        painter = painterResource(id = R.drawable.co1),
                         contentDescription = "ImG", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()

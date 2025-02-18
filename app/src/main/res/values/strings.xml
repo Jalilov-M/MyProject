@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
+
+<string name="bear_description">
+        The bear (Ursidae) is a large, powerful mammal known for its strength, intelligence, and adaptability. There are eight species of bears found across North America, South America, Europe, and Asia, with the most well-known being the brown bear, polar bear, and black bear. Bears vary in size and behavior, but most have thick fur, strong claws, and an excellent sense of smell, which helps them locate food over long distances.\n\n
+        Bears are omnivores, meaning they eat both plants and meat. Their diet depends on the species and habitat—while polar bears primarily hunt seals, brown bears and black bears eat berries, fish, small mammals, and honey. Some species, like the giant panda, rely almost entirely on bamboo.\n\n
+        Most bears are solitary animals, except during mating season or when a mother is raising cubs. Despite their large size, they can run fast, climb trees, and even swim well. Hibernation is another key feature of some bear species, such as the grizzly bear, which enters a deep sleep during winter to survive harsh conditions.\n\n
+        Bears play important roles in ecosystems by spreading seeds, controlling prey populations, and maintaining balance in their habitats. However, they face threats from habitat loss, climate change, and illegal hunting. Conservation efforts are crucial to protecting bear populations, especially species like the polar bear, which is endangered due to melting ice in the Arctic.\n\n
+        Bears have been symbols of strength, courage, and wisdom in many cultures, appearing in myths, folklore, and even modern wildlife conservation campaigns.
+</string>
 </resources>

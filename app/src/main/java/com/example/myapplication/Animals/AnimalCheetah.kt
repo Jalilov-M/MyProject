@@ -2,6 +2,7 @@ package com.example.myapplication.Animals
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +40,36 @@ import com.example.myapplication.R
 
 @Composable
  fun AnimalCheetah(navController: NavController) {
+    var language by remember { mutableStateOf("en") }
+    val textMap = mapOf(
+        "en" to "Cheetahs are the fastest animals on land! They can run as fast as a car on a highway—up to 120 km/h (75 mph)! But they can only run that fast for a short time.\n" +
+                "\n" +
+                "\uD83D\uDC3E Super Speed: Cheetahs can go from 0 to 100 km/h (62 mph) in just 3 seconds—faster than most sports cars!\n" +
+                "\n" +
+                "\uD83D\uDC3E Spots for Camouflage: Their black spots help them hide in the tall grass and sneak up on their food.\n" +
+                "\n" +
+                "\uD83D\uDC3E Tear Marks: Cheetahs have black lines on their faces, like \"tears.\" These help protect their eyes from the sun, like built-in sunglasses!\n" +
+                "\n" +
+                "\uD83D\uDC3E They Don’t Roar: Unlike lions and tigers, cheetahs don’t roar—they purr, chirp, and even meow!\n" +
+                "\n" +
+                "\uD83D\uDC3E Fast but Not Strong: Cheetahs are built for speed, not fighting. Unlike other big cats, they can’t climb trees or fight off bigger animals.\n" +
+                "\n" +
+                "Cheetahs are amazing runners and love open spaces. They are some of the coolest cats in the wild! \uD83D\uDC06\uD83C\uDF3F\n" +
+                "\n",
+        "ru" to "Гепарды — самые быстрые животные на земле! Они могут разгоняться до 120 км/ч, как машина на трассе! Но бегать так быстро они могут только недолго.\n" +
+                "\n" +
+                "\uD83D\uDC3E Суперскорость: Гепарды разгоняются от 0 до 100 км/ч всего за 3 секунды—быстрее, чем спортивные автомобили!\n" +
+                "\n" +
+                "\uD83D\uDC3E Пятна для маскировки: Чёрные пятнышки помогают гепардам прятаться в траве и незаметно подкрадываться к добыче.\n" +
+                "\n" +
+                "\uD83D\uDC3E Слёзные полоски: У гепардов есть чёрные линии на мордочке, похожие на слёзы. Они защищают глаза от солнца—как встроенные солнцезащитные очки!\n" +
+                "\n" +
+                "\uD83D\uDC3E Они не рычат: В отличие от львов и тигров, гепарды не рычат—они мурлычут, чирикают и даже мяукают!\n" +
+                "\n" +
+                "\uD83D\uDC3E Быстрые, но не сильные: Гепарды созданы для скорости, а не для борьбы. Они не умеют лазить по деревьям и избегают драки с сильными животными.\n" +
+                "\n" +
+                "Гепарды—удивительные бегуны, которые любят просторные равнины. Это одни из самых крутых кошек в дикой природе! \uD83D\uDC06\uD83C\uDF3F"
+    )
     Column {
         Column(
             modifier = Modifier
@@ -63,19 +98,33 @@ import com.example.myapplication.R
 
                     Text(
                         "Cheetah",
-                        Modifier.padding(start = 20.dp),
+                        Modifier.padding(start = 10.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
                         color = Color.White
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.ico),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
+                        painter = painterResource(id = R.drawable.ru),
+                        contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 150.dp)
-                            .size(35.dp)
+                            .padding(start = 85.dp)
                             .clip(RoundedCornerShape(20.dp))
+
+                            .size(35.dp)
+                            .clickable { language ="ru" }
+
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.en),
+                        contentDescription = "English", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(20.dp))
+                            .padding(5.dp)
+                            .padding(start = 1.dp)
+                            .size(35.dp)
+                            .clickable { language="en" }
+
                     )
                 }
             }
@@ -91,19 +140,8 @@ import com.example.myapplication.R
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(
-                        text = "The cheetah (Acinonyx jubatus) is a large, agile cat known for being the fastest land animal, capable of reaching speeds of up to 100 km/h (62 mph) in short bursts. This extraordinary speed allows it to catch fast prey, such as gazelles, impalas, and other small to medium-sized ungulates, in a quick sprint after a short chase. Cheetahs are found primarily in sub-Saharan Africa, though there are small populations in Iran.\n" +
-                                "\n" +
-                                "Cheetahs are built for speed, with a slender body, long legs, and flexible spine that allow them to stretch their bodies out during high-speed chases. Their large nasal passages and enlarged heart help them get enough oxygen during intense bursts of speed. Unlike other big cats, cheetahs do not have retractable claws, which provide better grip while running at high speeds. Their tail, long and muscular, is used for steering and maintaining balance during high-speed pursuits.\n" +
-                                "\n" +
-                                "Cheetahs have distinctive black tear marks under their eyes, which help reduce glare from the sun, and they have unique spotted coats that provide camouflage in their grassy, open habitats. Their sharp vision, especially in the daylight, allows them to spot potential prey from great distances.\n" +
-                                "\n" +
-                                "Unlike other big cats, cheetahs are solitary or live in small family groups. Males are more independent, often forming loose coalitions, usually made up of brothers. Females tend to live alone, except when they are raising their cubs. Cheetah cubs are particularly vulnerable in their early life, and their survival rate is low due to predation by larger carnivores, like lions and hyenas.\n" +
-                                "\n" +
-                                "Cheetahs typically rely on stealth to get as close as possible to their prey before launching a chase. Their hunts are very energy-intensive, lasting only a few minutes, as they cannot sustain high speeds for long. Once a cheetah catches its prey, it needs to rest before consuming it because of the energy spent during the chase.\n" +
-                                "\n" +
-                                "Despite being incredible predators, cheetahs face significant threats. Habitat loss, human-wildlife conflict, and inbreeding due to low genetic diversity have led to a decline in their population. They are currently classified as vulnerable, with fewer than 7,000 cheetahs remaining in the wild.\n" +
-                                "\n" +
-                                "Cheetahs have been admired for their elegance and speed, symbolizing agility, grace, and precision in many cultures. Their unique abilities make them one of the most fascinating and admired animals in the animal kingdom.", Modifier.padding(5.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
+                        text = textMap[language] ?: ""
+                        , Modifier.padding(10.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
                     )
                 }
             }

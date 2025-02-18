@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import AnimalViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,17 +11,22 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -69,78 +75,64 @@ import com.example.myapplication.Animals.AnimalLion
 import com.example.myapplication.Animals.AnimalTiger
 import com.example.myapplication.Animals.AnimalWolf
 import kotlinx.coroutines.launch
+import androidx.lifecycle.viewmodel.compose.viewModel
+
+import androidx.compose.material3.*
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.material3.*
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.font.FontFamily
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.Animals.AnimalCow
+import com.example.myapplication.Animals.AnimalDolphin
+import com.example.myapplication.Animals.AnimalHorse
+import com.example.myapplication.Animals.AnimalKangaroo
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
-            // Start navigation
             val navController = rememberNavController()
             NavHost(navController = navController, startDestination = "main") {
-                composable("main") {
-                    Animal(navController)
-                }
-                composable("animalDog") {
-                    AnimalDog(navController = navController)
-                }
-                composable("cat") {
-                    AnimalCat(navController = navController)
-                }
-                composable("cheetah") {
-                    AnimalCheetah(navController = navController)
-                }
-                composable("cheetah") {
-                    AnimalCheetah(navController = navController)
-                }
-                composable("jackal") {
-                    AnimalJackal(navController = navController)
-                }
-                composable("giraffe") {
-                    AnimalGriraffe(navController = navController)
-                }
-                composable("elephant") {
-                    AnimalElephant(navController = navController)
-                }
-                composable("bear") {
-                    AnimalBear(navController = navController)
-                }
-                composable("bear") {
-                    AnimalBear(navController = navController)
-                }
-                composable("fox") {
-                    AnimalFox(navController = navController)
-                }
-                composable("lion") {
-                    AnimalLion(navController = navController)
-                }
-                composable("wolf") {
-                    AnimalWolf(navController = navController)
-                }
-                composable("tiger") {
-                    AnimalTiger(navController = navController)
-                }
-                composable("about") {
-                    AboutScreen(navController = navController)
-                }
-                composable("settings") {
-                    Seting(navController = navController)
-                }
+                composable("main") { Animal(navController) }
+                composable("Dog | Собака") { AnimalDog(navController) }
+                composable("Cat | Кошка") { AnimalCat(navController) }
+                composable("Cheetah | Гепард") { AnimalCheetah(navController) }
+                composable("Jackal | Шакал") { AnimalJackal(navController) }
+                composable("Giraffe | Жираф") { AnimalGriraffe(navController) }
+                composable("Elephant | Слон") { AnimalElephant(navController) }
+                composable("Bear | Медвед") { AnimalBear(navController) }
+                composable("Fox | Лиса") { AnimalFox(navController) }
+                composable("Lion | Лев") { AnimalLion(navController) }
+                composable("Wolf | Волк") { AnimalWolf(navController) }
+                composable("Tiger | Тигр") { AnimalTiger(navController) }
+                composable("Kangaroo | Кенгуру") { AnimalKangaroo(navController) }
+                composable("Horse | Лощадь") { AnimalHorse(navController) }
+                composable("Dolphin | Дельфин") { AnimalDolphin(navController) }
+                composable("Cow | Корова") { AnimalCow(navController) }
+                composable("about") { AboutScreen(navController) }
+                composable("settings") { Seting(navController) }
 
             }
         }
+
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Animal(navController: NavHostController) {
-    var isSwitch by remember { mutableStateOf(false) }
-    val items = listOf("About")
-    val selectedItem = remember { mutableStateOf(items[0]) }
+fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewModel()) {
+    var searchQuery by remember { mutableStateOf("") }
+    val filteredAnimals = viewModel.animals.filter { it.first.contains(searchQuery, ignoreCase = true) }
+
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-
+    val Language = false
+    val backgroundColor = if (viewModel.isDarkTheme) Color.DarkGray else Color(0xFF3876A4)
+    val textColor = if (viewModel.isDarkTheme) Color.White else Color.Black
+    val backOfButton = if (viewModel.isDarkTheme) Color.Gray else Color(0xFF336b99)
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -149,14 +141,8 @@ fun Animal(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(200.dp)
-                    .clip(
-                        RoundedCornerShape(
-                            topStart = 20.dp,
-                            topEnd = 20.dp
-                        )
-                    )
-                    .background(Color(0xFF3876A4))
-
+                    .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
+                    .background(backgroundColor)
             ) {
                 Row(
                     modifier = Modifier
@@ -165,432 +151,146 @@ fun Animal(navController: NavHostController) {
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ico),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
+                        contentDescription = "Image",
                         modifier = Modifier
                             .size(55.dp)
                             .clip(RoundedCornerShape(15.dp))
                     )
-                    Column(
-                        modifier = Modifier
-                            .padding(start = 5.dp)
-                    ) {
-                        Text("Jalilov", Modifier.padding(top = 20.dp), color = Color.White)
-                        Text("Muhammadamin", color = Color.White)
-
-                    }
-                }
-                items.forEach { item ->
-                    TextButton(
-                        onClick = {
-                            scope.launch { drawerState.close() }
-                            selectedItem.value = item
-                        },
-                        colors = ButtonDefaults.buttonColors(
-                            contentColor = Color.Black,
-                            containerColor = Color.Transparent
-                        )
-                    ) {
-
-
-                        Column {
-                            Text(
-                                text = "About",
-                                fontSize = 30.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-
-                                    .fillMaxWidth()
-                                    .padding(top = 5.dp)
-                                    .clip(shape = RoundedCornerShape(18.dp))
-                                    .background(Color(0xFF336b99))
-                                    .height(40.dp)
-                                    .clickable { navController.navigate("about") }
-
-
-                            )
-                            Text(
-                                text = "Settings",
-                                fontSize = 30.sp,
-                                color = Color.White,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-
-                                    .fillMaxWidth()
-                                    .padding(top = 5.dp)
-                                    .clip(shape = RoundedCornerShape(18.dp))
-                                    .background(Color(0xFF336b99))
-                                    .height(40.dp)
-                                    .clickable { navController.navigate("settings") }
-
-
-                            )
-                        }
-
-
+                    Column(modifier = Modifier.padding(start = 5.dp)) {
+                        Text("Jalilov", color = textColor, fontWeight = FontWeight.SemiBold, fontSize = 22.sp)
+                        Text("Muhammadamin", color = textColor, fontWeight = FontWeight.Light, fontSize = 18.sp)
                     }
                 }
 
+                TextButton(onClick = { scope.launch { drawerState.close() } }) {
+                    Column {
+                        Text(
+                            "About",
+                            fontSize = 30.sp,
+                            color = textColor,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 5.dp)
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(backOfButton)
+                                .height(50.dp)
+                                .clickable { navController.navigate("about") }
+                         )
+                        Text(
+                            "Settings",
+                            fontSize = 30.sp,
+                            color = textColor,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(backOfButton)
+                                .height(50.dp)
+                                .clickable { navController.navigate("settings") }
+                         )
+                    }
+                }
+
+                 Row(modifier = Modifier.padding(16.dp)) {
+                    Text("Dark Theme", color = textColor, fontSize = 18.sp, fontStyle = FontStyle.Normal)
+                    Switch(
+                        checked = viewModel.isDarkTheme,
+                        onCheckedChange = { viewModel.toggleTheme() },
+                        modifier = Modifier.padding(start = 10.dp)
+                    )
+                }
             }
         },
-
         content = {
             Column {
-                Column(
+                Box(
                     modifier = Modifier
-
+                        .fillMaxWidth()
+                        .background(backgroundColor)
+                        .padding(top = 30.dp)
+                        .clip(RoundedCornerShape(5.dp))
+                        .height(50.dp)
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(if (isSwitch) Color.Gray else Color(0xFF3876A4))
-                            .padding(top = 30.dp)
-                            .height(50.dp)
-
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(top = 4.dp)
                     ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(top = 4.dp)
-                        ) {
-                            IconButton(onClick = {
-                                scope.launch { drawerState.open() }
-                            }) {
-                                Icon(
-                                    Icons.Filled.Menu,
-                                    "Меню",
-                                    tint = if (isSwitch) Color.Black else Color.White
-                                )
-
-
-                            }
-
-
-                            Text(
-                                "Animals",
-                                Modifier.padding(start = 20.dp),
-                                fontSize = 32.sp,
-                                fontStyle = FontStyle.Italic,
-                                color = if (isSwitch) Color.Black else Color.White
+                        IconButton(onClick = { scope.launch { drawerState.open() } }) {
+                            Icon(
+                                Icons.Filled.Menu,
+                                "Menu",
+                                Modifier.size(30.dp),
+                                tint = Color.White
                             )
-                            Box(modifier = Modifier
-                                .padding(5.dp)
-                                .padding(start = 70.dp)) {
-                                Icon(Icons.Filled.Search,"search",
-                                    modifier = Modifier
-                                        .padding(start =  15.dp)
-                                        .size(55.dp)
-                                        .clip(RoundedCornerShape(1.dp)))
-                                Image(
-                                    painter = painterResource(id = R.drawable.ico),
-                                    contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                    modifier = Modifier
-                                        .padding(start = 60.dp)
-                                         .size(55.dp)
-                                        .clip(RoundedCornerShape(15.dp))
-                                )
-                            }
-
-                        }
+            }
+                        Text(
+                            "Animals",
+                            fontSize = 32.sp,
+                            color = textColor,
+                            modifier = Modifier.padding(start = 20.dp),
+                         )
                     }
-                    Column(
-                        modifier = Modifier
-                            .verticalScroll(rememberScrollState())
-                    ) {
+                }
 
+                TextField(
+                    value = searchQuery,
+                    onValueChange = { searchQuery = it },
+                    label = { Text("Поиск ", fontSize = 18.sp,  color = Color.DarkGray) },
+                    leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search Icon") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Color.White)
+                        .height(60.dp)
+                    ,
+                    colors = TextFieldDefaults.textFieldColors(
+                        cursorColor = Color.Black,
+                        focusedIndicatorColor = Color.LightGray,
+                        unfocusedIndicatorColor = Color.Gray
+                    ),
+                    singleLine = true,
+                    shape = RoundedCornerShape(12.dp)
+                )
 
-                        //Tiger
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(color = if(isSwitch)Color.DarkGray else Color(0xFFF0F0F0))
-                                .clickable {navController.navigate("tiger")  }
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a2),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Tiger",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = if(isSwitch)Color.White else Color.DarkGray
-                            )
-
-                        }
-                        //Wolf
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(filteredAnimals) { (name, imageRes) ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(top = 3.dp)
+                                .clickable { navController.navigate(name.lowercase()) }
                                 .background(Color(0xFFF0F0F0))
-                                .clickable {navController.navigate("wolf")  }
-
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
+                                .height(80.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.an2),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
+                                painter = painterResource(id = imageRes),
+                                contentDescription = "Animal Image",
+                                contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .padding(5.dp)
                                     .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
+                                    .clip(RoundedCornerShape(15.dp))
+                                    .shadow(5.dp, shape = RoundedCornerShape(15.dp))
                             )
                             Text(
-                                "Wolf",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
+                                name,
+                                fontSize = 28.sp,
+                                fontStyle = FontStyle.Normal,
+                                fontWeight = FontWeight.Light,
+                                color = Color.DarkGray,
                             )
 
-                        }
-                        //Lion an3
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .clickable { navController.navigate("lion") }
-                                .background(Color(0xFFF0F0F0))
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.an3),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Lion",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
 
-                        }
-                        // Fox an4
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .background(Color(0xFFF0F0F0))
-                                .clickable { navController.navigate("fox") }
 
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.an4),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Fox",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
 
-                        }
-                        // Bear a5
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .clickable { navController.navigate("bear") }
-
-                                .background(Color(0xFFF0F0F0))
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a5),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Bear",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
-
-                        }
-                        // elephant A6
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .background(Color(0xFFF0F0F0))
-                                .clickable { navController.navigate("elephant") }
-
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a6),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Elephant",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
-
-                        }
-                        //Girafe a7 a8 a88
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .background(Color(0xFFF0F0F0))
-                                .clickable { navController.navigate("giraffe") }
-
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a8),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Giraffe",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .background(Color(0xFFF0F0F0))
-                                .clickable { navController.navigate("jackal") }
-
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a9),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Jackal",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { navController.navigate("cheetah") }
-
-                                .padding(top = 3.dp)
-                                .background(Color(0xFFF0F0F0))
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a10),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Cheetah",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
-
-                        }
-
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .background(Color(0xFFF0F0F0))
-                                .clickable {
-                                    navController.navigate("animalDog") // Navigate to AnimalDog screen
-                                }
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a11),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Dog",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
-
-                        }
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 3.dp)
-                                .background(Color(0xFFF0F0F0))
-                                .clickable { navController.navigate("cat") }
-                                .height(80.dp), verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.a12),
-                                contentDescription = "ImG", contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .size(65.dp)
-                                    .clip(shape = RoundedCornerShape(15.dp))
-                            )
-                            Text(
-                                "Cat",
-                                fontSize = 30.sp,
-                                fontStyle = FontStyle.Italic,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.DarkGray
-                            )
                         }
                     }
                 }
+
+
+
+
+
             }
         }
     )

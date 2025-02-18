@@ -2,6 +2,7 @@ package com.example.myapplication.Animals
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +40,43 @@ import com.example.myapplication.R
 
 @Composable
  fun AnimalFox(navController: NavController) {
+    var language by remember { mutableStateOf("en") }
+    val textMap = mapOf(
+        "en" to "Foxes are smart, playful, and curious animals that live in forests, mountains, and even cities! They are part of the dog family but act more like cats!\n" +
+                "\n" +
+                "\uD83D\uDC3E Super Hearing: Foxes can hear tiny sounds, even a mouse moving under deep snow! This helps them find food even in winter.\n" +
+                "\n" +
+                "\uD83D\uDC3E Night Explorers: Foxes are nocturnal, which means they sleep during the day and are most active at night.\n" +
+                "\n" +
+                "\uD83D\uDC3E Fluffy Tail: A fox’s tail, called a \"brush,\" helps it stay warm in winter. Foxes even wrap their tails around themselves like a blanket when they sleep!\n" +
+                "\n" +
+                "\uD83D\uDC3E Fox Talk: Foxes make more than 40 different sounds! They can bark, yelp, chirp, and even scream to talk to each other.\n" +
+                "\n" +
+                "\uD83D\uDC3E Jumping Masters: Foxes are great jumpers! They can leap over fences and pounce high into the air to catch their food.\n" +
+                "\n" +
+                "\uD83D\uDC3E Clever Tricksters: Foxes are known for being very smart! They use clever tricks to escape danger and find food.\n" +
+                "\n" +
+                "\uD83D\uDC3E Loners: Unlike wolves, foxes don’t live in big packs. They usually hunt alone but take care of their babies, called kits, until they grow up.\n" +
+                "\n" +
+                "Foxes are cute, curious, and full of surprises! \uD83E\uDD8A\uD83C\uDF42",
+        "ru" to "Лисы — умные, игривые и любопытные животные, которые живут в лесах, горах и даже рядом с людьми! Они принадлежат к семейству собак, но во многом ведут себя, как кошки!\n" +
+                "\n" +
+                "\uD83D\uDC3E Отличный слух: Лисы могут слышать даже мышь, двигающуюся под толстым слоем снега! Это помогает им находить еду зимой.\n" +
+                "\n" +
+                "\uD83D\uDC3E Ночные охотники: Лисы ведут ночной образ жизни—днём они спят, а ночью выходят искать еду.\n" +
+                "\n" +
+                "\uD83D\uDC3E Пушистый хвост: Лисий хвост, который называют \"кистью\", помогает сохранять тепло. Лисы даже закутываются в него, как в одеяло, когда спят!\n" +
+                "\n" +
+                "\uD83D\uDC3E Разговоры лис: Лисы умеют издавать более 40 разных звуков! Они могут лаять, визжать, чирикать и даже \"кричать\", общаясь друг с другом.\n" +
+                "\n" +
+                "\uD83D\uDC3E Прыгуны: Лисы отлично прыгают! Они могут перепрыгивать заборы и высоко подпрыгивать, чтобы поймать добычу.\n" +
+                "\n" +
+                "\uD83D\uDC3E Хитрые охотники: Лисы известны своей находчивостью и хитростью! Они придумывают умные способы избегать опасности и находить еду.\n" +
+                "\n" +
+                "\uD83D\uDC3E Одиночки: В отличие от волков, лисы не живут в стаях. Они охотятся в одиночку, но заботятся о своих детёнышах, которых называют лисятами, пока те не вырастут.\n" +
+                "\n" +
+                "Лисы — удивительные, ловкие и умные животные, которые всегда находят выход из любой ситуации! \uD83E\uDD8A\uD83C\uDF42"
+    )
     Column {
         Column(
             modifier = Modifier
@@ -69,13 +111,27 @@ import com.example.myapplication.R
                         color = Color.White
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.ico),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
+                        painter = painterResource(id = R.drawable.ru),
+                        contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 150.dp)
-                            .size(35.dp)
+                            .padding(start = 135.dp)
                             .clip(RoundedCornerShape(20.dp))
+
+                            .size(35.dp)
+                            .clickable { language ="ru" }
+
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.en),
+                        contentDescription = "English", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .padding(start = 1.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .size(35.dp)
+                            .clickable { language="en" }
+
                     )
                 }
             }
@@ -91,15 +147,8 @@ import com.example.myapplication.R
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(
-                        text = "The fox (Vulpes) is a small to medium-sized carnivorous mammal known for its intelligence, agility, and adaptability. Foxes belong to the **Canidae** family, which also includes wolves and dogs, but they are distinguished by their slender bodies, bushy tails, pointed ears, and sharp facial features. The most common species is the **red fox** (*Vulpes vulpes*), which is found across North America, Europe, Asia, and even parts of North Africa.  \n" +
-                                "\n" +
-                                "Foxes are highly adaptable and can thrive in **forests, grasslands, mountains, deserts, and even urban areas**. They are opportunistic omnivores, feeding on small mammals, birds, insects, fruits, and even scavenging from human settlements when necessary. Their sharp senses of hearing and smell help them locate prey even under snow or thick vegetation.  \n" +
-                                "\n" +
-                                "Unlike wolves and lions, foxes are solitary hunters, meaning they do not rely on packs for survival. However, they do form small family groups during the breeding season, and both parents often take care of the cubs. Foxes use high-pitched barks, yelps, and body language to communicate with each other.  \n" +
-                                "\n" +
-                                "One of the most recognizable features of a fox is its bushy tail, also known as a brush, which helps with balance and warmth. Foxes are also famous for their cunning nature, often outsmarting predators and humans alike, which has made them a common character in folklore and mythology around the world.  \n" +
-                                "\n" +
-                                "Fox populations are generally stable, but they face threats such as habitat destruction, hunting, and diseases like rabies. Despite this, their adaptability has allowed them to thrive in a wide range of environments, including cities, where they have learned to coexist with humans.", Modifier.padding(5.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
+                        text = textMap[language] ?: ""
+                        , Modifier.padding(10.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
                     )
                 }
             }

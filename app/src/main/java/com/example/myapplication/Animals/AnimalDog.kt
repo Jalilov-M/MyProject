@@ -2,6 +2,7 @@ package com.example.myapplication.Animals
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +40,35 @@ import androidx.navigation.NavController
 
 @Composable
 fun AnimalDog(navController: NavController) {
+    var language by remember { mutableStateOf("en") }
+    val textMap = mapOf(
+        "en" to "Dogs are friendly and loyal animals that love to play and protect their families. They come in all shapes and sizes, from tiny Chihuahuas to big Saint Bernards!\n" +
+                "\n" +
+                "\uD83D\uDC3E Super Smellers: Dogs can smell things 100,000 times better than humans! That’s why they help police find missing people and hidden objects.\n" +
+                "\n" +
+                "\uD83D\uDC3E Fast Runners: Some dogs, like greyhounds, can run up to 72 km/h (45 mph)—almost as fast as a car in the city!\n" +
+                "\n" +
+                "\uD83D\uDC3E Smart & Loyal: Dogs can learn more than 100 words and commands. Some, like Border Collies, are as smart as a 2-year-old child!\n" +
+                "\n" +
+                "\uD83D\uDC3E Different Barks: Dogs bark in different ways to show happiness, excitement, or even to warn their owners.\n" +
+                "\n" +
+                "\uD83D\uDC3E Wagging Tails: A wagging tail usually means a dog is happy, but it can also show excitement or nervousness.\n" +
+                "\n" +
+                "Dogs are amazing pets that love humans and always bring happiness to their families! \uD83D\uDC36❤\uFE0F",
+        "ru" to "Собаки — это дружелюбные и верные животные, которые любят играть и защищать свою семью. Они бывают разного размера — от крошечных чихуахуа до огромных сенбернаров!\n" +
+                "\n" +
+                "\uD83D\uDC3E Отличный нюх: Собаки чувствуют запахи в 100 000 раз лучше, чем люди! Поэтому они помогают полиции искать пропавших людей и находить спрятанные вещи.\n" +
+                "\n" +
+                "\uD83D\uDC3E Быстрые бегуны: Некоторые собаки, например борзые, могут разгоняться до 72 км/ч — почти как машина в городе!\n" +
+                "\n" +
+                "\uD83D\uDC3E Умные и преданные: Собаки могут запомнить более 100 слов и команд. А породы, такие как бордер-колли, такие же умные, как двухлетний ребёнок!\n" +
+                "\n" +
+                "\uD83D\uDC3E Разные лаи: Собаки лают по-разному, чтобы показать радость, волнение или предупредить хозяина.\n" +
+                "\n" +
+                "\uD83D\uDC3E Виляние хвостом: Обычно виляющий хвост значит, что собака счастлива, но иногда это признак волнения.\n" +
+                "\n" +
+                "Собаки — замечательные друзья, которые любят людей и всегда дарят радость! \uD83D\uDC36❤\uFE0F"
+    )
     Column {
         Column(
             modifier = Modifier
@@ -70,13 +104,27 @@ fun AnimalDog(navController: NavController) {
                         color = Color.White
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.ico),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
+                        painter = painterResource(id = R.drawable.ru),
+                        contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 150.dp)
-                            .size(35.dp)
+                            .padding(start = 130.dp)
                             .clip(RoundedCornerShape(20.dp))
+
+                            .size(35.dp)
+                            .clickable { language ="ru" }
+
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.en),
+                        contentDescription = "English", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .padding(start = 1.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .size(35.dp)
+                            .clickable { language="en" }
+
                     )
                 }
             }
@@ -92,24 +140,8 @@ fun AnimalDog(navController: NavController) {
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(
-                        text = "The dog (Canis lupus familiaris) is one of the most popular and diverse domesticated animals in the world. Known for its loyalty, companionship, and varied roles in human society, dogs have been living alongside humans for thousands of years, evolving from wild ancestors, such as wolves, into the vast array of breeds seen today.\n" +
-                                "\n" +
-                                "Dogs come in various shapes, sizes, and temperaments, from tiny breeds like the Chihuahua to large ones like the Great Dane. Over time, humans have selectively bred dogs for specific traits, leading to the creation of hundreds of distinct breeds with varying abilities, including herding, hunting, guarding, and companionship. These different breeds also exhibit a wide range of personalities, from energetic and playful to calm and laid-back.\n" +
-                                "\n" +
-                                "Dogs are omnivores, meaning they can eat a wide variety of foods, including meat, vegetables, and grains. However, their diet should be balanced to meet their nutritional needs, with high-quality dog food often containing protein, fats, vitamins, and minerals.\n" +
-                                "\n" +
-                                "One of the most defining characteristics of dogs is their social nature. They thrive in the company of humans and other animals, making them excellent pets and companions. Dogs are often trained to assist people with disabilities, such as guide dogs for the blind, or as therapy dogs to provide comfort in hospitals and nursing homes. Many dogs also serve as working animals in roles such as police dogs, search-and-rescue dogs, and herding dogs for livestock.\n" +
-                                "\n" +
-                                "Dogs have an extraordinary ability to communicate with humans through body language, vocalizations, and expressions. They can learn a wide range of commands and tricks, and their keen sense of smell allows them to detect drugs, explosives, or even illnesses like cancer. Their sense of hearing is also highly developed, making them excellent watchdogs.\n" +
-                                "\n" +
-                                "Over the centuries, dogs have become not only loyal companions but also symbols of friendship, protection, and unconditional love. They are often featured in stories, folklore, and art as symbols of loyalty and courage. However, despite their domestication, dogs still retain many instincts and behaviors from their wild ancestors, including territoriality, hunting, and pack dynamics.\n" +
-                                "\n" +
-                                "Dogs' life expectancy ranges from about 10 to 15 years, depending on the breed, size, and overall health. Larger breeds tend to have shorter lifespans, while smaller breeds may live longer. Regular veterinary care, a healthy diet, and plenty of exercise are essential for a dog's well-being.\n" +
-                                "\n" +
-                                "Today, dogs are beloved around the world, serving as loyal companions, protectors, and helpers in many aspects of human life.",
-                        Modifier.padding(5.dp),
-                        fontSize = 15.sp,
-                        textAlign = TextAlign.Justify
+                        text = textMap[language] ?: ""
+                        , Modifier.padding(10.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
                     )
                 }
             }

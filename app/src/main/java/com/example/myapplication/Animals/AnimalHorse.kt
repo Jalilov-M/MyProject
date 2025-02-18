@@ -39,43 +39,43 @@ import com.example.myapplication.R
 
 
 @Composable
- fun AnimalGriraffe  (navController: NavController) {
+ fun AnimalHorse(navController: NavController) {
     var language by remember { mutableStateOf("en") }
     val textMap = mapOf(
-        "en" to "Giraffes are the tallest animals in the world! They live in Africa and love eating leaves from tall trees.\n" +
+        "en" to "Horses are graceful, strong, and fast animals that have been helping humans for thousands of years. They live on farms, in stables, and even in the wild!\n" +
                 "\n" +
-                "\uD83D\uDC3E Super Tall: Giraffes can grow up to 6 meters (20 feet) tall—that’s as high as a two-story house!\n" +
+                "\uD83D\uDC3E Fast Runners: Horses can run up to 70 km/h (43 mph) in short bursts! That’s faster than most cars can go in a city!\n" +
                 "\n" +
-                "\uD83D\uDC3E Long Neck: A giraffe’s neck is as long as an adult human—about 2 meters (6 feet)! But guess what? They have the same number of neck bones as humans—just much bigger!\n" +
+                "\uD83D\uDC3E Super Strong: Horses can carry heavy loads, and some are even used for pulling carts or plows. Their muscles help them carry people and do hard work.\n" +
                 "\n" +
-                "\uD83D\uDC3E Blue Tongue: Their tongues are dark blue or purple and can be 50 cm (20 inches) long! This helps protect them from the hot sun while they eat.\n" +
+                "\uD83D\uDC3E Long Faces: Horses have long, beautiful faces with large, expressive eyes. Their eyes are located on the side of their heads, which helps them see all around them!\n" +
                 "\n" +
-                "\uD83D\uDC3E Fast Runners: Even though giraffes look slow, they can run up to 60 km/h (37 mph) for short distances!\n" +
+                "\uD83D\uDC3E Excellent Ears: Horses have big, sensitive ears that can move in different directions. They use their ears to listen for sounds and show how they’re feeling!\n" +
                 "\n" +
-                "\uD83D\uDC3E Sleepy Giants: Giraffes sleep only 30 minutes to 2 hours a day—one of the shortest sleep times of any animal!\n" +
+                "\uD83D\uDC3E Horses Sleep Standing Up: Horses can sleep while standing because they have special muscles that lock their legs in place. But they need to lie down for deeper sleep.\n" +
                 "\n" +
-                "\uD83D\uDC3E Powerful Kick: A giraffe’s kick is so strong it can knock down a lion!\n" +
+                "\uD83D\uDC3E Mane and Tail: A horse’s mane and tail are made of long, flowing hair. They help keep flies and bugs away from their bodies.\n" +
                 "\n" +
-                "\uD83D\uDC3E No Voice?: Giraffes are very quiet, but they can make humming, grunting, and even mooing sounds!\n" +
+                "\uD83D\uDC3E Friendly and Smart: Horses are very intelligent and can learn new tricks and tasks. Many horses are also friendly and enjoy spending time with people.\n" +
                 "\n" +
-                "Giraffes are gentle giants that love roaming the African savanna! \uD83E\uDD92\uD83C\uDF3F",
-        "ru" to "Жирафы — самые высокие животные в мире! Они живут в Африке и любят лакомиться листьями с высоких деревьев.\n" +
+                "Horses are beautiful, strong, and wonderful companions! \uD83D\uDC34\uD83C\uDF3F",
+        "ru" to "Лошади — грациозные, сильные и быстрые животные, которые помогают людям уже тысячи лет. Они живут на фермах, в конюшнях и даже в дикой природе!\n" +
                 "\n" +
-                "\uD83D\uDC3E Очень высокие: Жирафы могут вырастать до 6 метров—это как двухэтажный дом!\n" +
+                "\uD83D\uDC3E Быстрые бегуны: Лошади могут бегать со скоростью до 70 км/ч на короткие дистанции! Это быстрее, чем большинство машин в городе!\n" +
                 "\n" +
-                "\uD83D\uDC3E Длинная шея: Шея жирафа длиной почти 2 метра—примерно как рост взрослого человека! Но знаете что? У них столько же шейных позвонков, сколько у людей—просто они намного больше!\n" +
+                "\uD83D\uDC3E Очень сильные: Лошади могут нести тяжёлые грузы, а некоторые используются для транспортировки тележек и плугов. Их мышцы помогают им нести людей и выполнять тяжёлую работу.\n" +
                 "\n" +
-                "\uD83D\uDC3E Синий язык: Язык жирафа тёмно-синий или фиолетовый и может быть длиной до 50 см! Это помогает ему не обжигаться на солнце, пока он ест.\n" +
+                "\uD83D\uDC3E Длинные морды: У лошадей длинные, красивые морды с большими выразительными глазами. Их глаза расположены по бокам головы, что помогает им видеть всё вокруг!\n" +
                 "\n" +
-                "\uD83D\uDC3E Быстрые бегуны: Несмотря на длинные ноги, жирафы могут разгоняться до 60 км/ч!\n" +
+                "\uD83D\uDC3E Отличные уши: У лошадей большие чувствительные уши, которые могут двигаться в разные стороны. Они используют уши, чтобы слушать звуки и показывать своё настроение!\n" +
                 "\n" +
-                "\uD83D\uDC3E Мало спят: Жирафы спят всего от 30 минут до 2 часов в сутки—это один из самых коротких снов среди животных!\n" +
+                "\uD83D\uDC3E Лошади спят стоя: Лошади могут спать стоя, потому что у них есть особые мышцы, которые фиксируют их ноги. Но для глубокого сна им нужно ложиться.\n" +
                 "\n" +
-                "\uD83D\uDC3E Сильный удар: Удар жирафа такой мощный, что он может свалить даже льва!\n" +
+                "\uD83D\uDC3E Грива и хвост: Грива и хвост лошади состоят из длинных, шелковистых волос. Они помогают защищаться от мух и насекомых.\n" +
                 "\n" +
-                "\uD83D\uDC3E Почти не издают звуков: Жирафы очень тихие, но они умеют гудеть, фыркать и даже \"мычать\"!\n" +
+                "\uD83D\uDC3E Дружелюбные и умные: Лошади очень умные и могут учить новые трюки и задачи. Многие лошади также дружелюбны и любят проводить время с людьми.\n" +
                 "\n" +
-                "Жирафы — это добрые великаны, которые живут в африканской саванне! \uD83E\uDD92\uD83C\uDF3F"
+                "Лошади — красивые, сильные и замечательные спутники! \uD83D\uDC34\uD83C\uDF3F"
     )
     Column {
         Column(
@@ -104,7 +104,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Giraffe",
+                        "Horse",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -115,7 +115,7 @@ import com.example.myapplication.R
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 110.dp)
+                            .padding(start = 120.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)
@@ -138,12 +138,12 @@ import com.example.myapplication.R
             Box() {
                 Column(Modifier.verticalScroll(rememberScrollState())) {
                     Image(
-                        painter = painterResource(id = R.drawable.a88),
+                        painter = painterResource(id = R.drawable.ho1),
                         contentDescription = "ImG", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(5.dp)
-                            .size(width = 0.dp, height = 190.dp)
+                            .size(width = 150.dp, height = 190.dp)
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(

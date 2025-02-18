@@ -2,6 +2,7 @@ package com.example.myapplication.Animals
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +40,43 @@ import com.example.myapplication.R
 
 @Composable
  fun AnimalLion(navController: NavController) {
+    var language by remember { mutableStateOf("en") }
+    val textMap = mapOf(
+        "en" to "Lions are strong and brave animals known as the \"kings of the jungle.\" They live in Africa and love to spend time with their families, called prides.\n" +
+                "\n" +
+                "\uD83D\uDC3E Big Cats: Lions are the second-largest big cats after tigers! Male lions can weigh up to 250 kg (550 lbs)!\n" +
+                "\n" +
+                "\uD83D\uDC3E Loud Roar: A lion’s roar is so powerful that it can be heard up to 8 km (5 miles) away!\n" +
+                "\n" +
+                "\uD83D\uDC3E Sleepy Kings: Lions sleep for 16-20 hours a day to save energy for hunting!\n" +
+                "\n" +
+                "\uD83D\uDC3E Team Hunters: Lionesses (female lions) hunt together while male lions protect the pride. They work as a team to catch zebras, antelopes, and buffalos.\n" +
+                "\n" +
+                "\uD83D\uDC3E Fluffy Mane: Only male lions have a big, fluffy mane around their heads. The darker the mane, the stronger the lion!\n" +
+                "\n" +
+                "\uD83D\uDC3E Fast Sprinters: Lions can run up to 80 km/h (50 mph), but only for short distances.\n" +
+                "\n" +
+                "\uD83D\uDC3E Big Families: A lion pride can have up to 40 lions, including cubs, mothers, and a few males.\n" +
+                "\n" +
+                "Lions are strong, powerful, and love their families! \uD83E\uDD81\uD83C\uDF3F",
+        "ru" to "Львы — сильные и смелые животные, которых называют \"королями джунглей\". Они живут в Африке и любят проводить время со своей семьёй, которая называется прайд.\n" +
+                "\n" +
+                "\uD83D\uDC3E Большие кошки: Львы — вторые по величине кошки после тигров! Вес самца может достигать 250 кг!\n" +
+                "\n" +
+                "\uD83D\uDC3E Громкий рёв: Рык льва такой мощный, что его слышно на расстоянии 8 км!\n" +
+                "\n" +
+                "\uD83D\uDC3E Сонные короли: Львы спят по 16-20 часов в день, чтобы накапливать силы для охоты!\n" +
+                "\n" +
+                "\uD83D\uDC3E Охотники в команде: Львицы (самки) охотятся вместе, а самцы защищают прайд. Они работают в команде, чтобы ловить зебр, антилоп и буйволов.\n" +
+                "\n" +
+                "\uD83D\uDC3E Густая грива: Только у самцов есть пышная грива вокруг головы. Чем темнее грива, тем сильнее лев!\n" +
+                "\n" +
+                "\uD83D\uDC3E Быстрые спринтеры: Львы могут разгоняться до 80 км/ч, но на короткие дистанции.\n" +
+                "\n" +
+                "\uD83D\uDC3E Большие семьи: В одном прайде может быть до 40 львов, включая детёнышей, мам и нескольких самцов.\n" +
+                "\n" +
+                "Львы — сильные, могучие и заботливые к своей семье! \uD83E\uDD81\uD83C\uDF3F"
+    )
     Column {
         Column(
             modifier = Modifier
@@ -69,13 +111,27 @@ import com.example.myapplication.R
                         color = Color.White
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.ico),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
+                        painter = painterResource(id = R.drawable.ru),
+                        contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 150.dp)
-                            .size(35.dp)
+                            .padding(start = 130.dp)
                             .clip(RoundedCornerShape(20.dp))
+
+                            .size(35.dp)
+                            .clickable { language ="ru" }
+
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.en),
+                        contentDescription = "English", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .padding(start = 1.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .size(35.dp)
+                            .clickable { language="en" }
+
                     )
                 }
             }
@@ -91,15 +147,8 @@ import com.example.myapplication.R
                             .clip(RoundedCornerShape(20.dp))
                     )
                     Text(
-                        text = "The lion AnimalWolf.ktis one of the most powerful and iconic big cats, known for its majestic mane, strong social structure, and commanding presence. Unlike most wild cats, lions are highly social and live in groups called **prides**, which typically consist of related lionesses, their cubs, and a few dominant males. These prides work together to protect their territory and hunt prey, making lions unique among big cats.  \n" +
-                                "\n" +
-                                "Lions are found in **savannas, grasslands, and open woodlands**, primarily in Africa, with a small, endangered population in India’s Gir Forest. They are **apex predators**, preying on animals like zebras, wildebeests, and buffalos. Lionesses are the primary hunters, using teamwork to take down large prey, while males defend the pride and their territory from rivals.  \n" +
-                                "\n" +
-                                "A male lion’s **mane** is a symbol of strength and dominance, with darker, fuller manes often attracting more mates and intimidating rivals. Their deep, thunderous **roar** can be heard up to **8 kilometers (5 miles) away**, serving as a warning to intruders or a call to pride members.  \n" +
-                                "\n" +
-                                "Despite their reputation as \"kings of the jungle,\" lions face major threats, including habitat loss, human conflict, and poaching. Their populations have significantly declined, and conservation efforts focus on protecting their habitats and reducing conflicts with local communities.  \n" +
-                                "\n" +
-                                "Lions have been revered in human culture for centuries, symbolizing courage, leadership, and power. From ancient myths and royal emblems to modern wildlife conservation campaigns, lions continue to be one of the most respected and admired animals in the world.", Modifier.padding(5.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
+                        text = textMap[language] ?: ""
+                        , Modifier.padding(10.dp), fontSize = 15.sp, textAlign = TextAlign.Justify
                     )
                 }
             }
