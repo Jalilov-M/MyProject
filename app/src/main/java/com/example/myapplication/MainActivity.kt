@@ -1,13 +1,14 @@
 package com.example.myapplication
 
 import AnimalViewModel
-import android.os.Bundle
+ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -81,6 +82,7 @@ import androidx.compose.material3.*
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.material3.*
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.Animals.AnimalCow
@@ -113,7 +115,7 @@ class MainActivity : ComponentActivity() {
                 composable("Dolphin | Дельфин") { AnimalDolphin(navController) }
                 composable("Cow | Корова") { AnimalCow(navController) }
                 composable("about") { AboutScreen(navController) }
-                composable("settings") { Seting(navController) }
+                composable("settings") { Settings (navController ) }
 
             }
         }
@@ -129,10 +131,10 @@ fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewMo
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val Language = false
     val backgroundColor = if (viewModel.isDarkTheme) Color.DarkGray else Color(0xFF3876A4)
-    val textColor = if (viewModel.isDarkTheme) Color.White else Color.Black
+    val textColor = if (viewModel.isDarkTheme) Color.DarkGray else Color.Black
     val backOfButton = if (viewModel.isDarkTheme) Color.Gray else Color(0xFF336b99)
+    val Rowcolor = if (viewModel.isDarkTheme) Color.LightGray else Color(0xFFF0F0F0)
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -157,47 +159,44 @@ fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewMo
                             .clip(RoundedCornerShape(15.dp))
                     )
                     Column(modifier = Modifier.padding(start = 5.dp)) {
-                        Text("Jalilov", color = textColor, fontWeight = FontWeight.SemiBold, fontSize = 22.sp)
-                        Text("Muhammadamin", color = textColor, fontWeight = FontWeight.Light, fontSize = 18.sp)
+                        Text("Jalilov", color = Color.White, fontWeight = FontWeight.SemiBold, fontSize = 22.sp)
+                        Text("Muhammadamin", color = Color.White, fontWeight = FontWeight.Light, fontSize = 18.sp)
                     }
                 }
 
                 TextButton(onClick = { scope.launch { drawerState.close() } }) {
-                    Column {
+                    Column() {
                         Text(
-                            "About",
+                            "Settings", textAlign = TextAlign.Center,
                             fontSize = 30.sp,
-                            color = textColor,
+                            color = Color.White,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(bottom = 5.dp)
-                                .clip(RoundedCornerShape(10.dp))
+                                .clip(RoundedCornerShape(12.dp))
                                 .background(backOfButton)
-                                .height(50.dp)
-                                .clickable { navController.navigate("about") }
-                         )
-                        Text(
-                            "Settings",
-                            fontSize = 30.sp,
-                            color = textColor,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(RoundedCornerShape(10.dp))
-                                .background(backOfButton)
-                                .height(50.dp)
+                                .height(40.dp)
                                 .clickable { navController.navigate("settings") }
                          )
                     }
+
+                }
+                TextButton(onClick = { scope.launch { drawerState.close() } }) {
+                    Column() {
+                        Text(
+                            "About", textAlign = TextAlign.Center,
+                            fontSize = 30.sp,
+                            color = Color.White,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(backOfButton)
+                                .height(40.dp)
+                                .clickable { navController.navigate("about") }
+                        )
+                    }
+
                 }
 
-                 Row(modifier = Modifier.padding(16.dp)) {
-                    Text("Dark Theme", color = textColor, fontSize = 18.sp, fontStyle = FontStyle.Normal)
-                    Switch(
-                        checked = viewModel.isDarkTheme,
-                        onCheckedChange = { viewModel.toggleTheme() },
-                        modifier = Modifier.padding(start = 10.dp)
-                    )
-                }
             }
         },
         content = {
@@ -225,7 +224,7 @@ fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewMo
                         Text(
                             "Animals",
                             fontSize = 32.sp,
-                            color = textColor,
+                            color = Color.White,
                             modifier = Modifier.padding(start = 20.dp),
                          )
                     }
@@ -239,26 +238,27 @@ fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewMo
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(12.dp))
-                        .background(Color.White)
+                        .background(Color.DarkGray)
                         .height(60.dp)
                     ,
                     colors = TextFieldDefaults.textFieldColors(
+                        containerColor =Rowcolor,
                         cursorColor = Color.Black,
                         focusedIndicatorColor = Color.LightGray,
                         unfocusedIndicatorColor = Color.Gray
                     ),
                     singleLine = true,
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(8.dp)
                 )
 
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                LazyColumn(modifier = Modifier.fillMaxSize().background(Color.Gray)) {
                     items(filteredAnimals) { (name, imageRes) ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = 3.dp)
+                                .padding(top = 1.5f.dp)
                                 .clickable { navController.navigate(name.lowercase()) }
-                                .background(Color(0xFFF0F0F0))
+                                .background(Rowcolor)
                                 .height(80.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -277,7 +277,7 @@ fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewMo
                                 fontSize = 28.sp,
                                 fontStyle = FontStyle.Normal,
                                 fontWeight = FontWeight.Light,
-                                color = Color.DarkGray,
+                                color = textColor,
                             )
 
 

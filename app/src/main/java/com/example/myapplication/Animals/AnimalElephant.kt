@@ -41,6 +41,9 @@ import com.example.myapplication.R
 @Composable
  fun AnimalElephant(navController: NavController ) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Elephant",
+        "ru" to "Слон      ")
     val textMap = mapOf(
         "en" to "Elephants are the biggest land animals on Earth! They live in Africa and Asia and love to be with their families.\n" +
                 "\n" +
@@ -96,7 +99,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Elephant",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 10.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -107,7 +110,7 @@ import com.example.myapplication.R
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 80.dp)
+                            .padding(start = 75.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)

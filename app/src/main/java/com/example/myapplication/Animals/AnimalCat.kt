@@ -41,6 +41,9 @@ import com.example.myapplication.R
 @Composable
  fun AnimalCat(navController: NavController) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Cat      ",
+        "ru" to "Кошкa")
     val textMap = mapOf(
         "en" to "Cats are small, furry animals that love to play, jump, and explore! They can be pets or live in the wild. Some cats, like lions and tigers, are big, but house cats are small and friendly.\n" +
                 "\n" +
@@ -97,7 +100,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Cat",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 10.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -108,7 +111,7 @@ import com.example.myapplication.R
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 150.dp)
+                            .padding(start = 110.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)

@@ -41,6 +41,9 @@ import androidx.navigation.NavController
 @Composable
 fun AnimalDog(navController: NavController) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Dog      ",
+        "ru" to "Собакa")
     val textMap = mapOf(
         "en" to "Dogs are friendly and loyal animals that love to play and protect their families. They come in all shapes and sizes, from tiny Chihuahuas to big Saint Bernards!\n" +
                 "\n" +
@@ -97,7 +100,7 @@ fun AnimalDog(navController: NavController) {
 
 
                     Text(
-                        "Dog",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -108,7 +111,7 @@ fun AnimalDog(navController: NavController) {
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 130.dp)
+                            .padding(start = 90.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)

@@ -41,7 +41,9 @@ import com.example.myapplication.R
 @Composable
 fun AnimalCow(navController: NavController) {
     var language by remember { mutableStateOf("en") }
-
+    val nameMao= mapOf(
+    "en" to "Cow      ",
+    "ru" to "Коровa")
     val textMap = mapOf(
         "en" to "Cows are gentle, social, and important animals on farms all over the world. They provide us with milk, meat, and are loved for their calm nature.\n" +
                 "\n" +
@@ -108,7 +110,7 @@ fun AnimalCow(navController: NavController) {
 
 
                     Text(
-                        "Cow",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -119,7 +121,7 @@ fun AnimalCow(navController: NavController) {
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 130.dp)
+                            .padding(start = 90.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)

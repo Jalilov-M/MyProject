@@ -41,6 +41,9 @@ import com.example.myapplication.R
 @Composable
  fun AnimalTiger(navController: NavController) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Tiger",
+        "ru" to "Тигр ")
     val textMap = mapOf(
         "en" to "Tigers are the biggest cats in the world! They are strong, fast, and love to swim. These beautiful animals live in forests and grasslands of Asia.\n" +
                 "\n" +
@@ -107,7 +110,8 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Tiger",
+                        text = nameMao[language] ?: "",
+
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,

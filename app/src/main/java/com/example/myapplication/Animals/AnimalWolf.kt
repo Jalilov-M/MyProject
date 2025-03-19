@@ -41,6 +41,9 @@ import com.example.myapplication.R
 @Composable
  fun AnimalWolf(navController: NavController) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Wolf ",
+        "ru" to "Волк")
     val textMap = mapOf(
         "en" to "Wolves are smart, strong, and great team players! They live in forests, mountains, and cold snowy places around the world.\n" +
                 "\n" +
@@ -104,7 +107,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Wolf",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,

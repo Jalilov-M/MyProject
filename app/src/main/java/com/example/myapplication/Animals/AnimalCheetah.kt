@@ -41,6 +41,9 @@ import com.example.myapplication.R
 @Composable
  fun AnimalCheetah(navController: NavController) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Cheetah",
+        "ru" to "Гепард  ")
     val textMap = mapOf(
         "en" to "Cheetahs are the fastest animals on land! They can run as fast as a car on a highway—up to 120 km/h (75 mph)! But they can only run that fast for a short time.\n" +
                 "\n" +
@@ -97,7 +100,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Cheetah",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 10.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,

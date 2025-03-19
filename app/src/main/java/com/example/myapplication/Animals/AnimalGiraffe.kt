@@ -41,6 +41,9 @@ import com.example.myapplication.R
 @Composable
  fun AnimalGriraffe  (navController: NavController) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Giraffe ",
+        "ru" to "Жираф")
     val textMap = mapOf(
         "en" to "Giraffes are the tallest animals in the world! They live in Africa and love eating leaves from tall trees.\n" +
                 "\n" +
@@ -104,7 +107,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Giraffe",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -115,7 +118,7 @@ import com.example.myapplication.R
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 110.dp)
+                            .padding(start = 97.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)

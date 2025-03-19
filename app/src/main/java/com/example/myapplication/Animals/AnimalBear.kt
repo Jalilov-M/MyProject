@@ -3,6 +3,7 @@ package com.example.myapplication.Animals
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,7 +42,10 @@ import com.example.myapplication.R
 @Composable
 fun AnimalBear(navController: NavController) {
     var language by remember { mutableStateOf("en") }
-
+    val nameMao = mapOf(
+        "en" to "Bear      ",
+        "ru" to "Медвед"
+    )
     val textMap = mapOf(
         "en" to "Bears are big, strong, and fluffy animals that live in forests, mountains, and even icy places! There are different kinds of bears, like brown bears, black bears, and polar bears. Some, like pandas, love to eat bamboo, while others enjoy honey, berries, fish, and even insects!\n" +
                 "\n" +
@@ -87,9 +91,8 @@ fun AnimalBear(navController: NavController) {
                 ) {
                     IconButton(onClick = {
                     }) {
-                        Icon(Icons.Filled.ArrowBack, "Back", tint = Color.White
-                        , modifier = Modifier
-                                .clickable { navController.popBackStack() }
+                        Icon(Icons.Filled.ArrowBack, "Back", tint = Color.White, modifier = Modifier
+                            .clickable { navController.popBackStack() }
                         )
 
 
@@ -97,22 +100,23 @@ fun AnimalBear(navController: NavController) {
 
 
                     Text(
-                        "Bear",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
                         color = Color.White
                     )
+
                     Image(
                         painter = painterResource(id = R.drawable.ru),
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 130.dp)
+                            .padding(start = 85.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)
-                            .clickable { language ="ru" }
+                            .clickable { language = "ru" }
 
                     )
                     Image(
@@ -123,28 +127,69 @@ fun AnimalBear(navController: NavController) {
                             .padding(5.dp)
                             .padding(start = 1.dp)
                             .size(35.dp)
-                            .clickable { language="en" }
+                            .clickable { language = "en" }
 
                     )
+
                 }
             }
             Box() {
                 Column(Modifier.verticalScroll(rememberScrollState())) {
-                    Image(
-                        painter = painterResource(id = R.drawable.a5),
-                        contentDescription = "ImG", contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(5.dp)
-                            .size(width = 150.dp, height = 190.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                    )
+                    Row(Modifier.horizontalScroll(rememberScrollState())) {
+                        Image(
+                            painter = painterResource(id = R.drawable.a5),
+                            contentDescription = "ImG", contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(5.dp)
+                                .size(width = 340.dp, height = 190.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.b2),
+                            contentDescription = "ImG", contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(5.dp)
+                                .size(width = 320.dp, height = 190.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.b3),
+                            contentDescription = "ImG", contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(5.dp)
+                                .size(width = 320.dp, height = 190.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.b4),
+                            contentDescription = "ImG", contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(5.dp)
+                                .size(width = 320.dp, height = 190.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.b5),
+                            contentDescription = "ImG", contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(5.dp)
+                                .size(width = 320.dp, height = 190.dp)
+                                .clip(RoundedCornerShape(20.dp))
+                        )
+                    }
+
                     Text(
                         text = textMap[language] ?: "",
                         Modifier.padding(10.dp),
                         fontSize = 15.sp,
                         textAlign = TextAlign.Justify
                     )
+
                 }
             }
         }

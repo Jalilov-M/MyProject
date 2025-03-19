@@ -41,6 +41,9 @@ import com.example.myapplication.R
 @Composable
  fun AnimalDolphin(navController: NavController) {
     var language by remember { mutableStateOf("en") }
+    val nameMao= mapOf(
+        "en" to "Dolphin    ",
+        "ru" to "Дельфин")
     val textMap = mapOf(
         "en" to "Dolphins are intelligent, friendly, and playful sea animals. They live in oceans and seas around the world and are known for their amazing swimming skills!\n" +
                 "\n" +
@@ -104,7 +107,7 @@ import com.example.myapplication.R
 
 
                     Text(
-                        "Dolphin",
+                        text = nameMao[language] ?: "",
                         Modifier.padding(start = 20.dp),
                         fontSize = 32.sp,
                         fontStyle = FontStyle.Italic,
@@ -115,7 +118,7 @@ import com.example.myapplication.R
                         contentDescription = "Russian", contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .padding(5.dp)
-                            .padding(start = 85.dp)
+                            .padding(start = 65.dp)
                             .clip(RoundedCornerShape(20.dp))
 
                             .size(35.dp)
