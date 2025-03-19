@@ -128,6 +128,7 @@ class MainActivity : ComponentActivity() {
 fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewModel()) {
     var searchQuery by remember { mutableStateOf("") }
     val filteredAnimals = viewModel.animals.filter { it.first.contains(searchQuery, ignoreCase = true) }
+    val colorUp = if (viewModel.isDarkTheme) Color.Black else Color(0xFF3876A4)
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -166,6 +167,7 @@ fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewMo
 
                 TextButton(onClick = { scope.launch { drawerState.close() } }) {
                     Column() {
+
                         Text(
                             "Settings", textAlign = TextAlign.Center,
                             fontSize = 30.sp,
@@ -204,7 +206,7 @@ fun Animal(navController: NavHostController, viewModel: AnimalViewModel = viewMo
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(backgroundColor)
+                        .background(colorUp)
                         .padding(top = 30.dp)
                         .clip(RoundedCornerShape(5.dp))
                         .height(50.dp)

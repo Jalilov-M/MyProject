@@ -3,6 +3,7 @@ package com.example.myapplication
 import AnimalViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,7 +47,17 @@ import androidx.navigation.NavController
 
 @Composable
 fun Settings(navController: NavController, viewModel: AnimalViewModel = viewModel()) {
-    val darkTheme = remember { mutableStateOf(false) }
+
+    var isDarkTheme=viewModel.isDarkTheme
+    var language by remember { mutableStateOf("en") }
+    val title = if (language == "en") "Settings" else "Настройка"
+    val dar = if (language == "en") "Dark theme" else "Тёмная тема"
+    val nots = if (language == "en") "Notification" else "Уведомления"
+    val fstyle = if (language == "en") "Font style" else "Стиль шрифта"
+    val fsize = if (language == "en") "Font size" else "Размер шрифта"
+    val but = if (language == "en") "Choose" else "Выбрать"
+
+
     val not = remember { mutableStateOf(false) }
     var selectedFont by remember { mutableStateOf(FontFamily.Default) }
     var expanded by remember { mutableStateOf(false) }
@@ -82,12 +93,33 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                     }
 
                     Text(
-                        "Settings",
+                        title,
                         Modifier.padding(start = 20.dp),
                         fontSize = selectedFontSize,
                         fontStyle = FontStyle.Italic,
                         color = Color.White,
                         fontFamily = selectedFont
+                    )
+                    Spacer(Modifier.weight(1f))
+                    Image(
+                        painter = painterResource(id = R.drawable.ru),
+                        contentDescription = "Russian", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .padding(start = 7.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .size(35.dp)
+                            .clickable { language = "ru" }
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.en),
+                        contentDescription = "English", contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .padding(start = 1.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                            .size(35.dp)
+                            .clickable { language = "en" }
                     )
                 }
             }
@@ -103,7 +135,7 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                     .padding(horizontal = 8.dp)
             ) {
                 Text(
-                    text = "Dark theme",
+                    text = dar,
                     color = colorFont,
                     fontSize = selectedFontSize,
                     fontFamily = selectedFont
@@ -134,7 +166,7 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                     .padding(horizontal = 8.dp)
             ) {
                 Text(
-                    text = "Notification",
+                    text = nots,
                     color = colorFont,
                     fontSize = selectedFontSize,
                     fontFamily = selectedFont
@@ -167,7 +199,7 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                     .padding(8.dp)
             ) {
                 Text(
-                    text = "Font style",
+                    text = fstyle,
                     color = colorFont,
                     fontSize = selectedFontSize,
                     fontFamily = selectedFont
@@ -186,7 +218,7 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                             contentColor = Color.Black
                         )
                     ) {
-                        Text(text = "Choose", color = colorFont)
+                        Text(text = but, color = colorFont)
                     }
 
                     DropdownMenu(
@@ -222,7 +254,7 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                     .padding(8.dp)
             ) {
                 Text(
-                    text = "Font size",
+                    text = fsize,
                     color = colorFont,
                     fontSize = selectedFontSize,
                     fontFamily = selectedFont
@@ -241,7 +273,7 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                             contentColor = Color.Black
                         )
                     ) {
-                        Text(text = "Choose", color = colorFont)
+                        Text(text = but, color = colorFont)
                     }
 
                     DropdownMenu(
@@ -251,7 +283,7 @@ fun Settings(navController: NavController, viewModel: AnimalViewModel = viewMode
                             .background(Color(0xFFD0D0D0))
                             .clip(RoundedCornerShape(12.dp))
                     ) {
-                        listOf(10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30).forEach { size ->
+                        listOf(10, 12, 14, 16, 18, 20, 22, 24, 26).forEach { size ->
                             DropdownMenuItem(
                                 text = { Text("$size sp", color = colorFont) },
                                 onClick = {

@@ -1,5 +1,6 @@
 package com.example.myapplication.Animals
 
+import AnimalViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,13 +36,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.myapplication.R
 
 
 @Composable
-fun AnimalBear(navController: NavController) {
+fun AnimalBear(navController: NavController, viewModel: AnimalViewModel = viewModel()) {
     var language by remember { mutableStateOf("en") }
+    val colorUp = if (viewModel.isDarkTheme) Color.Black else Color(0xFF3876A4)
+
     val nameMao = mapOf(
         "en" to "Bear      ",
         "ru" to "Медвед"
@@ -80,7 +84,7 @@ fun AnimalBear(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFF3876A4))
+                    .background(colorUp)
                     .padding(top = 30.dp)
                     .height(50.dp)
 
